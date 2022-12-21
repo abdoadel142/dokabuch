@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Max } from "class-validator";
 
 export class ItemDTO {
   @ApiProperty()
@@ -7,6 +8,7 @@ export class ItemDTO {
   @ApiProperty()
   name: string;
 
+  @Max(6)
   @ApiProperty()
   quantity: number;
   

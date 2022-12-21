@@ -20,4 +20,12 @@ export class CreateProductDTO {
   
   @ApiProperty()
   image: string;
+  
+  @ApiProperty()
+  extra: [
+    {
+      name:string,
+      price:number
+    }
+  ];
 }
