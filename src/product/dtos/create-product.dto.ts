@@ -16,11 +16,12 @@ export class CreateProductDTO {
   price: number;
   
   @ApiProperty()
+  @IsString()
   category: string;
   
   @ApiProperty()
   image: string;
 
   @ApiProperty()
-  extra: string
+  extra: string[]
 }

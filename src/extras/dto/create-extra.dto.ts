@@ -8,11 +8,5 @@ export class CreateExtraDto {
     @ApiProperty()
     price: number;
   
-    @ApiProperty()
-    tile: Object;
-
-    @ApiProperty()
-    productId: Object;
-
 
 }

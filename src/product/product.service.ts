@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import mongoose, { Model, SchemaTypes } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductDocument } from './schemas/product.schema';
 import { CreateProductDTO } from './dtos/create-product.dto';
 import { FilterProductDTO } from './dtos/filter-product.dto';
+import { Category } from 'src/category/entities/category.entity';
 
 @Injectable()
 export class ProductService {
@@ -21,23 +22,26 @@ export class ProductService {
     }
 
     if (category) {
-      products = products.filter(product => product.category === category)
+      products = products.filter(product => product.category.toString() === category )
     }
 
     return products;
   }
 
   async getAllProducts(): Promise<Product[]> {
-    const products = await this.productModel.find().exec();
+    const products = await this.productModel.find().populate('category').exec();
     return products;
   }
 
   async getProduct(id: string): Promise<Product> {
-    const product = await this.productModel.findById(id).exec();
+    const product = await this.productModel.findById(id).populate('Category').exec();
     return product;
   }
 
   async addProduct(createProductDTO: CreateProductDTO): Promise<Product> {
+    const foundProduct = await this.productModel.findOne({name:createProductDTO.name})
+    if(foundProduct)
+    throw new HttpException('product already exist',HttpStatus.CONFLICT)
     const newProduct = await this.productModel.create(createProductDTO);
     return newProduct.save();
   }
@@ -49,7 +53,8 @@ export class ProductService {
   }
 
   async deleteProduct(id: string): Promise<any> {
-    const deletedProduct = await this.productModel.findByIdAndRemove(id);
+    var foundedId = new mongoose.Types.ObjectId(id);
+    const deletedProduct = await this.productModel.findByIdAndRemove(foundedId);
     return deletedProduct;
   }
 }

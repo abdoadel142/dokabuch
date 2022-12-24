@@ -19,6 +19,9 @@ export class Item {
 
   @Prop()
   subTotalPrice: number; 
+
+  @Prop({ type: [SchemaTypes.ObjectId], ref: 'Extra' })
+  extra: [];
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);

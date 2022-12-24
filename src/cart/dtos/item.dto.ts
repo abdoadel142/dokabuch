@@ -14,4 +14,7 @@ export class ItemDTO {
   
   @ApiProperty()
   price: number;
+
+  @ApiProperty()
+  extra:[]
 }

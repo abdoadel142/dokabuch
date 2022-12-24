@@ -6,13 +6,13 @@ import { ProductModule } from './product/product.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CartModule } from './cart/cart.module';
-import { UsersModule } from './users/users.module';
 import { ExtrasModule } from './extras/extras.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb+srv://adel:adel142142142@cluster0.mgvx10x.mongodb.net/?retryWrites=true&w=majority'), 
-    ProductModule, UserModule, AuthModule, CartModule, UsersModule, ExtrasModule, 
+    ProductModule, UserModule, AuthModule, CartModule, UserModule, ExtrasModule, CategoryModule, 
   ],
   controllers: [AppController],
   providers: [AppService],

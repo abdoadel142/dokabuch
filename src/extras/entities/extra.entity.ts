@@ -11,8 +11,7 @@ export class Extra {
   @Prop()
   price: number;
 
-  @Prop()
-  tile: Object;
+
 
 }
 
