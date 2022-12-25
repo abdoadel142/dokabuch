@@ -23,5 +23,8 @@ export class CreateProductDTO {
   image: string;
 
   @ApiProperty()
-  extra: string[]
+  limit:number;
+  
+  @ApiProperty()
+  extra: string
 }

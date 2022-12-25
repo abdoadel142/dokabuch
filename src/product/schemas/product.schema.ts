@@ -23,6 +23,10 @@ export class Product {
   image: string;
 
 
+  @Prop()
+  limit: number;
+
+
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

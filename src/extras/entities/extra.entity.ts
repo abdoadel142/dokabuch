@@ -9,7 +9,17 @@ export class Extra {
   name: string;
 
   @Prop()
+  formalName: string;
+
+  @Prop()
   price: number;
+
+  @Prop()
+  isOptional: Boolean;
+
+  @Prop()
+  extraTile: Object;
+
 
 
 
