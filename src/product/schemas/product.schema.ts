@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, ObjectId, SchemaTypes } from 'mongoose';
+import { Extra } from 'src/extras/entities/extra.entity';
 
 export type ProductDocument = Product & Document;
 
@@ -26,6 +27,8 @@ export class Product {
   @Prop()
   limit: number;
 
+  @Prop({ type: [{ type: SchemaTypes.ObjectId, ref: 'Extra' }] })
+  extras: Extra[];
 
 }
 

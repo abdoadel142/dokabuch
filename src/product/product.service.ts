@@ -29,12 +29,12 @@ export class ProductService {
   }
 
   async getAllProducts(): Promise<Product[]> {
-    const products = await this.productModel.find().populate('category').exec();
+    const products = await this.productModel.find().populate('category').populate('Extra').exec();
     return products;
   }
 
   async getProduct(id: string): Promise<Product> {
-    const product = await this.productModel.findById(id).populate('Category').exec();
+    const product = await this.productModel.findById(id).populate('Category').populate('Extra').exec();
     return product;
   }
 

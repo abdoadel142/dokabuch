@@ -8,11 +8,12 @@ import { AuthModule } from './auth/auth.module';
 import { CartModule } from './cart/cart.module';
 import { ExtrasModule } from './extras/extras.module';
 import { CategoryModule } from './category/category.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb+srv://adel:adel142142142@cluster0.mgvx10x.mongodb.net/?retryWrites=true&w=majority'), 
-    ProductModule, UserModule, AuthModule, CartModule, UserModule, ExtrasModule, CategoryModule, 
+    ProductModule, UserModule, AuthModule, CartModule, UserModule, ExtrasModule, CategoryModule, OrderModule, 
   ],
   controllers: [AppController],
   providers: [AppService],
