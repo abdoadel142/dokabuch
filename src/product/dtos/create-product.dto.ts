@@ -29,5 +29,5 @@ export class CreateProductDTO {
   
   @IsNotEmpty()
   @ApiProperty()
-  extras: [string]
+  extra: string
 }
