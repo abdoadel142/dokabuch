@@ -15,6 +15,9 @@ export class Order {
   @Prop()
   address: string; 
   
+  
+  @Prop()
+  status: string; 
 
 }
 

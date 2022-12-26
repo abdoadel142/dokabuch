@@ -12,7 +12,11 @@ export class CreateOrderDto {
   
     @ApiProperty()
     @IsString()
-    address: string;     
+    address: string;    
+    
+    @ApiProperty()
+    @IsString()
+    status: string;  
 }
 
 

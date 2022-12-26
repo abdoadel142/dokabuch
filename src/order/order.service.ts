@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
+import { User } from 'src/user/schemas/user.schema';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order, OrderDocument } from './entities/order.entity';
@@ -14,13 +15,14 @@ export class OrderService {
     return newOrder.save();
   }
 
-  async findAll() : Promise<Order[]> {
-    const orders = await this.orderModel.find().populate('Cart').populate('User').exec();
+  async findAll(user:User) : Promise<Order[]> {
+    const orders = await this.orderModel.find(user).populate('Cart').populate('User').exec();
     return orders;
   }
 
   async findOne(id: number)  : Promise<Order> {
-    const order = await this.orderModel.findById(id).populate('Cart').populate('User').exec();
+    var foundedId = new mongoose.Types.ObjectId(id);
+    const order = await this.orderModel.findById(foundedId).populate('Cart').populate('User').exec();
     return order;
   }
 
