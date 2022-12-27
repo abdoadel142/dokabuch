@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors } from '@nestjs/common';
 import { ExtrasService } from './extras.service';
 import { CreateExtraDto } from './dto/create-extra.dto';
 import { UpdateExtraDto } from './dto/update-extra.dto';
-
+import { TransformInterceptor } from 'src/interceptors/interceptor';
+@UseInterceptors(TransformInterceptor) 
 @Controller('extras')
 export class ExtrasController {
   constructor(private readonly extrasService: ExtrasService) {}

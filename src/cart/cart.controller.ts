@@ -1,11 +1,12 @@
-import { Controller, Post, Body, Request, UseGuards, Delete, NotFoundException, Param, Get } from '@nestjs/common';
+import { Controller, Post, Body, Request, UseGuards, Delete, NotFoundException, Param, Get, UseInterceptors } from '@nestjs/common';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { TransformInterceptor } from 'src/interceptors/interceptor';
 import { CartService } from './cart.service';
 import { ItemDTO } from './dtos/item.dto';
-
+@UseInterceptors(TransformInterceptor) 
 @Controller('cart')
 export class CartController {
   constructor(private cartService: CartService) { }

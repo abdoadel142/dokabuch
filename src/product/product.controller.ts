@@ -7,7 +7,8 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
-
+import { TransformInterceptor } from 'src/interceptors/interceptor';
+@UseInterceptors(TransformInterceptor) 
 @Controller('store/products')
 export class ProductController {
   constructor(private productService: ProductService) { }
