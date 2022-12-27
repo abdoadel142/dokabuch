@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, SchemaTypes } from 'mongoose';
+import { Document, ObjectId, SchemaTypes } from 'mongoose';
 import { Cart } from 'src/cart/schemas/cart.schema';
 
 export type OrderDocument = Order & Document;
@@ -7,10 +7,10 @@ export type OrderDocument = Order & Document;
 @Schema()
 export class Order {
   @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
-  userId: string;
+  userId: ObjectId;
 
-  @Prop()
-  cart: Cart;
+  @Prop({ type: SchemaTypes.ObjectId, ref: 'Cart' })
+  cart: ObjectId;
 
   @Prop()
   address: string; 
