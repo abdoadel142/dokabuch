@@ -30,6 +30,9 @@ export class Product {
   @Prop({  type: SchemaTypes.ObjectId, ref: 'Extra'  })
   extra: ObjectId;
 
+  @Prop()
+  status: string;
+
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

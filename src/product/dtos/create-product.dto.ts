@@ -30,4 +30,9 @@ export class CreateProductDTO {
   @IsNotEmpty()
   @ApiProperty()
   extra: string
+
+  @ApiProperty()
+  @IsString()
+  status: string;
+
 }
