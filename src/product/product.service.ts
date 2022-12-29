@@ -33,7 +33,7 @@ export class ProductService {
     return products;
   }
 
-  async getProduct(id: string): Promise<Product> {
+  async getProduct(id: string): Promise<Product> {    
     const product = await this.productModel.findById(id).populate('category').populate('extra').exec();
     return product;
   }

@@ -27,8 +27,11 @@ export class Product {
   @Prop()
   limit: number;
 
-  @Prop({  type: SchemaTypes.ObjectId, ref: 'Extra'  })
-  extra: ObjectId;
+  // @Prop({  type: SchemaTypes.ObjectId, ref: 'Extra'  })
+  // extra: ObjectId;
+
+  @Prop([{ type: SchemaTypes.ObjectId, ref: 'Extra' }])
+  extra: ObjectId[];
 
   @Prop()
   status: string;

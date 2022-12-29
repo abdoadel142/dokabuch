@@ -16,13 +16,13 @@ export class OrderService {
   }
 
   async findAll(user:User) : Promise<Order[]> {
-    const orders = await this.orderModel.find({userId:user.userId}).exec();
+    const orders = await this.orderModel.find({userId:user.userId}).populate('cart').populate('userId').exec();
     return orders;
   }
 
   async findOne(id: number)  : Promise<Order> {
     var foundedId = new mongoose.Types.ObjectId(id);
-    const order = await this.orderModel.findById(foundedId).exec();
+    const order = await this.orderModel.findById(foundedId).populate('cart').populate('userId').exec();
     return order;
   }
 

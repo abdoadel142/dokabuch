@@ -29,7 +29,7 @@ export class CreateProductDTO {
   
   @IsNotEmpty()
   @ApiProperty()
-  extra: string
+  extra: string[]
 
   @ApiProperty()
   @IsString()

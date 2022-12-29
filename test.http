@@ -1,9 +1,5 @@
 
 @host = http://localhost:3000
 
-GET {{host}}/order/
-Content-Type: application/json
-
-##
-POST  {{host}}/auth/
+DELETE {{host}}/cart/63a1aadeb45c33db3f9fdd17
 Content-Type: application/json

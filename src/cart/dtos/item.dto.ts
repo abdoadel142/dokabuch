@@ -14,7 +14,6 @@ export class ItemDTO {
   @ApiProperty()
   quantity: number;
   
-  
   @ApiProperty()
   @IsNumber()
   price: number;
