@@ -19,6 +19,9 @@ export class Order {
   @Prop()
   status: string; 
 
+  @Prop()
+  date: string
+
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);
