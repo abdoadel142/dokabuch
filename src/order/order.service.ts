@@ -16,7 +16,10 @@ export class OrderService {
   }
 
   async findAll(user:User) : Promise<Order[]> {
-    const orders = await this.orderModel.find({userId:user.userId}).populate('cart').populate('userId').exec();
+    const orders = await this.orderModel.find().populate({path:'cart',populate: {
+      path: 'items.extra',
+      model: 'Extra'
+    } }).populate('userId').exec();
     return orders;
   }
 

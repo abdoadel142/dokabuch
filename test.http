@@ -1,5 +1,5 @@
 
 @host = http://localhost:3000
 
-GET  {{host}}/store/products/63ab28454fe46572ab3c8a3f
+GET  {{host}}/order
 Content-Type: application/json
