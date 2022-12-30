@@ -1,5 +1,5 @@
 
 @host = http://localhost:3000
 
-DELETE {{host}}/cart/63a1aadeb45c33db3f9fdd17
+GET  {{host}}/store/products/63ab28454fe46572ab3c8a3f
 Content-Type: application/json
