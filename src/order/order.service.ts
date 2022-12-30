@@ -25,7 +25,10 @@ export class OrderService {
 
   async findOne(id: number)  : Promise<Order> {
     var foundedId = new mongoose.Types.ObjectId(id);
-    const order = await this.orderModel.findById(foundedId).populate('cart').populate('userId').exec();
+    const order = await this.orderModel.findById(foundedId).populate({path:'cart',populate: {
+      path: 'items.extra',
+      model: 'Extra'
+    } }).populate('userId').exec();
     return order;
   }
 
