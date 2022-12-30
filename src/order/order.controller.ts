@@ -26,6 +26,13 @@ export class OrderController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin,Role.User)
+  @Get()
+  findAllOrders() {
+    return this.orderService.findAllOrders();
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.User,Role.Admin)
   @Get(':id')
   findOne(@Param('id') id: string) {

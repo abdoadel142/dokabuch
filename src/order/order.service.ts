@@ -23,6 +23,14 @@ export class OrderService {
     return orders;
   }
 
+  async findAllOrders() : Promise<Order[]> {
+    const orders = await this.orderModel.find().populate({path:'cart',populate: {
+      path: 'items.extra',
+      model: 'Extra'
+    } }).populate('userId').exec();
+    return orders;
+  }
+
   async findOne(id: number)  : Promise<Order> {
     var foundedId = new mongoose.Types.ObjectId(id);
     const order = await this.orderModel.findById(foundedId).populate({path:'cart',populate: {
@@ -33,8 +41,10 @@ export class OrderService {
   }
 
   async update(id: number, updateOrderDto: UpdateOrderDto) :Promise<Order>{
+    var foundedId = new mongoose.Types.ObjectId(id);
+
     const updatedOrder = await this.orderModel
-    .findByIdAndUpdate(id, updateOrderDto, { new: true });
+    .findByIdAndUpdate(foundedId, updateOrderDto, { new: true });
   return updatedOrder;  }
 
   async remove(id: number) 
