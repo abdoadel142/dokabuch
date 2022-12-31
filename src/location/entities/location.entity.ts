@@ -8,6 +8,48 @@ export class LocationContent {
 
   @Prop()
   long: Number;
+
+  @Prop()
+  area: string;
+
+  @Prop()
+  locality: string;
+
+  @Prop()
+  subAdministrativeArea: string;
+
+  @Prop()
+  administrativeArea: string;
+
+  @Prop()
+  streetName: string;
+
+  @Prop()
+  buildingName: string;
+
+  @Prop()
+  floorNumber: Number;
+
+  @Prop()
+  apartmentNumber: Number;
+
+  @Prop()
+  fullAddress: string;
+
+  @Prop()
+  knownLandMark: string;
+
+  @Prop()
+  phoneNumber: Number;
+
+  @Prop()
+  addressAddedTime: string;
+
+  @Prop()
+  buildingType: string;
+
+  @Prop()
+  isPrimary: Boolean;
 }
 
 export type LocationDocument = Location & Document;
