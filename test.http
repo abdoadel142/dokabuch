@@ -4,6 +4,4 @@
 POST {{host}}/auth/app/status
 Content-Type: application/json
 
-{
-"isActive":false
-}
+

@@ -21,7 +21,7 @@ export class AuthService {
     activeDto.isActive= !foundActive.isActive
     const updatedAuth = await this.authModel
     .findByIdAndUpdate(foundActive._id, activeDto, { new: false });
-    return updatedAuth;
+    return "successfully toggle status";
   }
 
   async create(activeDto: ActiveDto): Promise<any> {
