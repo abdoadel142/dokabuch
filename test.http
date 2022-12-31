@@ -1,5 +1,9 @@
 
 @host = http://localhost:3000
 
-GET  {{host}}/order
+POST {{host}}/auth/app/status
 Content-Type: application/json
+
+{
+"isActive":false
+}

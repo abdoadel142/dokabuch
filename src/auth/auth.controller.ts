@@ -7,7 +7,7 @@ import { JwtAuthGuard } from './guards/jwt.guard';
 import { Roles } from './decorators/roles.decorator';
 import { Role } from './enums/role.enum';
 import { RolesGuard } from './guards/roles.guard';
-import { LoginDto } from './dto/login-dto';
+import { ActiveDto, LoginDto } from './dto/login-dto';
 
 @Controller('auth')
 export class AuthController {
@@ -36,5 +36,12 @@ export class AuthController {
   @Get('/admin')
   getDashboard(@Request() req) {
     return req.user;
+  }
+
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.Admin)
+  @Post('/app/status')
+  activate(@Body() activeDto:ActiveDto) {
+    return this.authService.activate(activeDto);
   }
 }

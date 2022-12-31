@@ -7,9 +7,12 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import 'dotenv/config'
+import { MongooseModule } from '@nestjs/mongoose';
+import { AuthSchema } from './entities/auth.entity';
 
 @Module({
   imports: [
+    MongooseModule.forFeature([{ name: 'Auth', schema: AuthSchema }]),
     UserModule, 
     PassportModule,     
     JwtModule.register({
@@ -23,5 +26,6 @@ import 'dotenv/config'
     JwtStrategy
   ],
   controllers: [AuthController],
+  exports:[AuthService]
 })
 export class AuthModule {}

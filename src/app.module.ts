@@ -18,5 +18,6 @@ import { LocationModule } from './location/location.module';
   ],
   controllers: [AppController],
   providers: [AppService],
+  
 })
 export class AppModule {}
