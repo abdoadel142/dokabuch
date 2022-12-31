@@ -26,7 +26,7 @@ export class OrderController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin,Role.User)
+  @Roles(Role.Admin)
   @Get('cashier')
   findAllOrders() {
     return this.orderService.findAllOrders();

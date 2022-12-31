@@ -6,7 +6,7 @@ import { AuthService } from '../auth.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(    private readonly authService: AuthService,
+  constructor( 
     ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -16,11 +16,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    const activeAuth = await this.authService.findActive()
-    let active=activeAuth.isActive
-    console.log(activeAuth,"ddddddd");
-    
-    if(!active) throw new HttpException("Restaurant not active ",HttpStatus.NOT_ACCEPTABLE)
     return { userId: payload.sub, username: payload.username,email: payload.email, roles: payload.roles };
   }
 }
