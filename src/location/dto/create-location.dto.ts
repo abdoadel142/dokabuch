@@ -70,6 +70,11 @@ class locationDto {
   @IsBoolean()
   @ApiProperty()
   isPrimary: Boolean;
+
+  @IsBoolean()
+  @ApiProperty()
+  isLocationPhoneVerified: Boolean;
+  
 }
 
 export class CreateLocationDto {

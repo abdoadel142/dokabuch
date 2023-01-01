@@ -6,6 +6,10 @@ export class CreateCategoryDto {
 
   @ApiProperty()
   @IsString()
+  arName: string;
+
+  @ApiProperty()
+  @IsString()
   name: string;
 
  

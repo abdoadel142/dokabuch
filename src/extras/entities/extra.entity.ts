@@ -6,6 +6,9 @@ export type ExtraDocument = Extra & Document;
 @Schema()
 export class Extra {
   @Prop()
+  arName: string;
+
+  @Prop()
   name: string;
 
   @Prop()

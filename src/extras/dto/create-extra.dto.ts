@@ -2,8 +2,12 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsNumber, IsString } from "class-validator";
 
 export class CreateExtraDto {
-    @IsString()
     @ApiProperty()
+    @IsString()
+    arName: string;
+  
+    @ApiProperty()
+    @IsString()
     name: string;
   
     @IsNumber()

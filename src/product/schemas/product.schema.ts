@@ -10,6 +10,9 @@ export class Product {
   name: string;
 
   @Prop()
+  arName: string;
+
+  @Prop()
   description: string;
 
   @Prop()

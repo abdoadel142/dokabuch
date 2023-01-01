@@ -50,6 +50,9 @@ export class LocationContent {
 
   @Prop()
   isPrimary: Boolean;
+
+  @Prop()
+  isLocationPhoneVerified: Boolean;
 }
 
 export type LocationDocument = Location & Document;

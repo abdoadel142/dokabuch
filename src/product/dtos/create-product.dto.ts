@@ -5,6 +5,10 @@ export class CreateProductDTO {
 
   @ApiProperty()
   @IsString()
+  arName: string;
+
+  @ApiProperty()
+  @IsString()
   name: string;
 
   @ApiProperty()
