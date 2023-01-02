@@ -19,30 +19,31 @@ export class LocationController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User)
+  @Roles(Role.User,Role.Admin)
   @Get()
-  findAll() {
-    return this.locationService.findAll();
+  findAll(@Request() req) {
+    return this.locationService.findAll(req.user);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User)
+  @Roles(Role.User,Role.Admin)
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.locationService.findOne(+id);
+    return this.locationService.findOne(id);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User)
+  @Roles(Role.User,Role.Admin)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLocationDto: UpdateLocationDto) {
-    return this.locationService.update(+id, updateLocationDto);
+    return this.locationService.update(id, updateLocationDto);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.User,Role.Admin)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.locationService.remove(+id);
+    
+    return this.locationService.remove(id);
   }
 }

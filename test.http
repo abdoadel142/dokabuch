@@ -1,7 +1,7 @@
 
 @host = http://localhost:3000
 
-POST {{host}}/auth/app/status
+DELETE {{host}}/location/63af073706a7d5b3069c8d08
 Content-Type: application/json
 
 

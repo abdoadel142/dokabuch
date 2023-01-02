@@ -40,6 +40,6 @@ export class VersionController {
   @Roles(Role.Admin)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.versionService.remove(+id);
+    return this.versionService.remove(id);
   }
 }

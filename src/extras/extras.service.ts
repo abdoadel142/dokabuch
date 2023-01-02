@@ -24,7 +24,7 @@ export class ExtrasService {
     return extra;
   }
 
-  async update(id: number, updateExtraDto: UpdateExtraDto) : Promise<Extra> {
+  async update(id: string, updateExtraDto: UpdateExtraDto) : Promise<Extra> {
     var founded = new mongoose.Types.ObjectId(id);
     const updatedExtra = await this.extraModel
       .findByIdAndUpdate(founded, updateExtraDto, { new: true });

@@ -63,7 +63,7 @@ export class OrderService {
     return order;
   }
 
-  async update(id: number, updateOrderDto: UpdateOrderDto): Promise<Order> {
+  async update(id: string, updateOrderDto: UpdateOrderDto): Promise<Order> {
     var foundedId = new mongoose.Types.ObjectId(id);
 
     const updatedOrder = await this.orderModel.findByIdAndUpdate(
@@ -74,7 +74,7 @@ export class OrderService {
     return updatedOrder;
   }
 
-  async remove(id: number): Promise<any> {
+  async remove(id: string): Promise<any> {
     var foundedId = new mongoose.Types.ObjectId(id);
     const deletedOrder = await this.orderModel.findByIdAndRemove(foundedId);
     return deletedOrder;

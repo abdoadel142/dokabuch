@@ -46,7 +46,7 @@ export class ProductController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User)
+  @Roles(Role.Admin)
   @Put('/:id')
   async updateProduct(@Param('id') id: string, @Body() createProductDTO: CreateProductDTO) {
     const product = await this.productService.updateProduct(id, createProductDTO);
@@ -54,11 +54,9 @@ export class ProductController {
     return product;
   }
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User,Role.Admin)
+  @Roles(Role.Admin)
   @Delete()
-  async deleteProduct(@Query('id') id: string) {
-    console.log(id,"sss");
-    
+  async deleteProduct(@Query('id') id: string) {    
     const product = await this.productService.deleteProduct(id);
     if (!product) throw new NotFoundException('Product does not exist');
     return product;

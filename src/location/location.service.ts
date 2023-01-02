@@ -22,12 +22,14 @@ export class LocationService {
     return newLocation.save();
   }
 
-  async findAll(): Promise<Location[]> {
-    const locations = await this.locationModel.find().exec();
+  async findAll(user:User): Promise<Location[]> {
+    var foundedId = new mongoose.Types.ObjectId(user.userId);
+
+    const locations = await this.locationModel.find({userId:foundedId}).exec();
     return locations;
   }
 
-  async findOne(id: number): Promise<Location> {
+  async findOne(id: string): Promise<Location> {
     var foundedId = new mongoose.Types.ObjectId(id);
 
     const location = await this.locationModel.findById(foundedId).exec();
@@ -35,7 +37,7 @@ export class LocationService {
   }
 
   async update(
-    id: number,
+    id: string,
     updateLocationDto: UpdateLocationDto,
   ): Promise<Location> {
     var foundedId = new mongoose.Types.ObjectId(id);
@@ -48,7 +50,7 @@ export class LocationService {
     return updatedLocation;
   }
 
-  async remove(id: number): Promise<Location> {
+  async remove(id: string): Promise<Location> {    
     var foundedId = new mongoose.Types.ObjectId(id);
     const deletedLocation = await this.locationModel.findByIdAndRemove(foundedId);
     return deletedLocation;  }

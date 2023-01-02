@@ -25,7 +25,7 @@ export class ExtrasController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateExtraDto: UpdateExtraDto) {
-    return this.extrasService.update(+id, updateExtraDto);
+    return this.extrasService.update(id, updateExtraDto);
   }
 
   @Delete(':id')

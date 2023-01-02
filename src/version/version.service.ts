@@ -29,7 +29,7 @@ export class VersionService {
     return updatedVersion;
   }
 
-  async remove(id: number): Promise<any> {
+  async remove(id: string): Promise<any> {
     var founded = new mongoose.Types.ObjectId(id);
     const deletedVersion = await this.versionModel.findByIdAndRemove(founded);
     return deletedVersion;
