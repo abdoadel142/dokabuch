@@ -39,8 +39,8 @@ export class LocationController {
     return this.locationService.update(id, updateLocationDto);
   }
 
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  // @Roles(Role.User,Role.Admin)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.User,Role.Admin)
   @Delete(':id')
   remove(@Param('id') id: string) {
     

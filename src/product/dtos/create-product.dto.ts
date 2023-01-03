@@ -14,7 +14,11 @@ export class CreateProductDTO {
   @ApiProperty()
   @IsString()
   description: string;
-
+  
+  @ApiProperty()
+  @IsString()
+  arDescription: string;
+  
   @ApiProperty()
   @IsNumber()
   price: number;

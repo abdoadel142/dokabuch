@@ -31,7 +31,7 @@ export class ExtrasService {
     return updatedExtra;
   }
 
-  async remove(id: number): Promise<any> {
+  async remove(id: string): Promise<any> {
     var founded = new mongoose.Types.ObjectId(id);
     const deletedExtra = await this.extraModel.findByIdAndRemove(founded);
     return deletedExtra;

@@ -30,6 +30,6 @@ export class ExtrasController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.extrasService.remove(+id);
+    return this.extrasService.remove(id);
   }
 }

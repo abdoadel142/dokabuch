@@ -12,7 +12,8 @@ import { TransformInterceptor } from 'src/interceptors/interceptor';
 @Controller('store/products')
 export class ProductController {
   constructor(private productService: ProductService) { }
-  
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.User,Role.Admin)
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
@@ -47,12 +48,15 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Admin)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Put('/:id')
   async updateProduct(@Param('id') id: string, @Body() createProductDTO: CreateProductDTO) {
     const product = await this.productService.updateProduct(id, createProductDTO);
     if (!product) throw new NotFoundException('Product does not exist!');
     return product;
   }
+  
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Delete()

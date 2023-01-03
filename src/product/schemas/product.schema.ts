@@ -16,6 +16,9 @@ export class Product {
   description: string;
 
   @Prop()
+  arDescription: string;
+
+  @Prop()
   price: number;
 
 
