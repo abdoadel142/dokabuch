@@ -17,6 +17,9 @@ export class User {
   password: string;
 
   @Prop()
+  userToken: string;
+
+  @Prop()
   roles: Role[];
 
 

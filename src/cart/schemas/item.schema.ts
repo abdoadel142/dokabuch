@@ -5,6 +5,10 @@ export type ItemDocument = Item & Document;
 
 @Schema()
 export class Item {
+
+  @Prop()
+  id: string;
+
   @Prop({ type: SchemaTypes.ObjectId, ref: 'Product' })
   productId: string;
 

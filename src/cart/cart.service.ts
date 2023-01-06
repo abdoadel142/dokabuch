@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Cart, CartDocument } from './schemas/cart.schema';
 import { ItemDTO } from './dtos/item.dto';
+import {v4 as uuidv4} from 'uuid';
 
 @Injectable()
 export class CartService {
@@ -17,7 +18,7 @@ export class CartService {
     return newCart;
   }
 
-  async getCart(userId: string): Promise<CartDocument> {
+  async getCart(userId: string): Promise<CartDocument> {    
     const cart = await this.cartModel.findOne({ userId });
     return cart;
   }
@@ -35,13 +36,13 @@ export class CartService {
   }
 
   async addItemToCart(userId: string, itemDTO: ItemDTO): Promise<Cart> {
-    const { productId, quantity, price } = itemDTO;
+    const { productId, quantity, price,id = uuidv4() } = itemDTO;
     const subTotalPrice = quantity * price;
 
     const cart = await this.getCart(userId);
 
     if (cart) {
-      const itemIndex = cart.items.findIndex((item) => item.productId == productId);
+      const itemIndex = cart.items.findIndex((item) => item.id == id);
 
       if (itemIndex > -1) {
         let item = cart.items[itemIndex];
@@ -59,6 +60,31 @@ export class CartService {
     } else {
       const newCart = await this.createCart(userId, itemDTO, subTotalPrice, price);
       return newCart;
+    }
+  }
+  
+  async updateItemFromCart(userId: string, itemDTO: ItemDTO): Promise<Cart> { 
+    const { productId, quantity, id} = itemDTO;
+
+    const cart = await this.getCart(userId);
+
+    if (cart) {
+      const itemIndex = cart.items.findIndex((item) => item.id == id);
+
+      if (itemIndex > -1) {
+        let item = cart.items[itemIndex];
+        item.quantity = Number(item.quantity) + Number(quantity);
+        item.subTotalPrice = item.quantity * item.price;
+
+        cart.items[itemIndex] = item;
+        this.recalculateCart(cart);
+        return cart.save();
+      } else {
+        throw new HttpException("item not found",HttpStatus.NOT_FOUND)
+
+      }
+    } else {
+     throw new HttpException("not found cart",HttpStatus.NOT_FOUND)
     }
   }
 

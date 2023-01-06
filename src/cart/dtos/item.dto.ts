@@ -3,6 +3,9 @@ import { IsNumber, IsString, Max } from "class-validator";
 
 export class ItemDTO {
   @IsString()
+  id: string;
+
+  @IsString()
   @ApiProperty()
   productId: string;
 
