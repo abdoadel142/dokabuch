@@ -6,7 +6,7 @@ import {
   IsObject,
   IsString,
 } from 'class-validator';
-class locationDto {
+export class locationDto {
   @IsNumber()
   @ApiProperty()
   lat: number;

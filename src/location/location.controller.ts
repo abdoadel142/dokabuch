@@ -12,7 +12,7 @@ import { TransformInterceptor } from 'src/interceptors/interceptor';
 export class LocationController {
   constructor(private readonly locationService: LocationService) {}
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User)
+  @Roles(Role.User,Role.Admin)
   @Post()
   create(@Body() createLocationDto: CreateLocationDto,@Request() req) {
     return this.locationService.create(createLocationDto,req.user);

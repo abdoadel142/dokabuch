@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { DEFAULT_FACTORY_CLASS_METHOD_KEY } from '@nestjs/common/module-utils/constants';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 import { User } from 'src/user/schemas/user.schema';
-import { CreateLocationDto } from './dto/create-location.dto';
+import { CreateLocationDto, locationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
 import { Location, LocationDocument } from './entities/location.entity';
 
@@ -16,8 +17,11 @@ export class LocationService {
   async updatePrimaryLocations(user:User){
     var locations = await this.findAll(user);
     locations.forEach(async location=>{
-      location.location.isPrimary=false;
-      await this.locationModel.updateMany({userId:user.userId},location)
+      let updateLocationDto = new UpdateLocationDto ;
+      let loc= new locationDto
+      loc.isPrimary=false
+      updateLocationDto.location= loc
+      await this.update(location._id,updateLocationDto )
     })
     
   }
@@ -26,10 +30,11 @@ export class LocationService {
     user: User,
   ): Promise<Location> {
     createLocationDto.userId = user.userId;
-    const newLocation = await this.locationModel.create(createLocationDto);
-    if(newLocation.location.isPrimary==true){
+    if(createLocationDto.location.isPrimary==true){
       await this.updatePrimaryLocations(user)
     }
+    const newLocation = await this.locationModel.create(createLocationDto);
+   
     return newLocation.save();
   }
 
