@@ -27,7 +27,6 @@ export class OrderService {
           model: 'Extra',
         },
       })
-      .populate('userId')
       .exec();
     return orders;
   }
@@ -42,7 +41,6 @@ export class OrderService {
           model: 'Extra',
         },
       })
-      .populate('userId')
       .exec();
     return orders;
   }
@@ -58,7 +56,6 @@ export class OrderService {
           model: 'Extra',
         },
       })
-      .populate('userId')
       .exec();
     return order;
   }
