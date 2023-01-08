@@ -28,10 +28,10 @@ export class LocationContent {
   buildingName: string;
 
   @Prop()
-  floorNumber: Number;
+  floorNumber: string;
 
   @Prop()
-  apartmentNumber: Number;
+  apartmentNumber: string;
 
   @Prop()
   fullAddress: string;
@@ -70,6 +70,7 @@ export class Location {
 
   @Prop({ required: true, type: LocationContent })
   location: LocationContent;
+  _id: any;
 }
 
 export const LocationSchema = SchemaFactory.createForClass(Location);

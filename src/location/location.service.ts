@@ -13,12 +13,23 @@ export class LocationService {
     private readonly locationModel: Model<LocationDocument>,
   ) {}
 
+  async updatePrimaryLocations(user:User){
+    var locations = await this.findAll(user);
+    locations.forEach(async location=>{
+      location.location.isPrimary=false;
+      await this.locationModel.updateMany({userId:user.userId},location)
+    })
+    
+  }
   async create(
     createLocationDto: CreateLocationDto,
     user: User,
   ): Promise<Location> {
     createLocationDto.userId = user.userId;
     const newLocation = await this.locationModel.create(createLocationDto);
+    if(newLocation.location.isPrimary==true){
+      await this.updatePrimaryLocations(user)
+    }
     return newLocation.save();
   }
 

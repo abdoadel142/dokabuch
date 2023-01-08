@@ -41,11 +41,11 @@ class locationDto {
 
   @IsNumber()
   @ApiProperty()
-  floorNumber: Number;
+  floorNumber: string;
 
   @IsNumber()
   @ApiProperty()
-  apartmentNumber: Number;
+  apartmentNumber: string;
 
   @IsString()
   @ApiProperty()
