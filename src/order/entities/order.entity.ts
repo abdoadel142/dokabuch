@@ -22,6 +22,16 @@ export class Order {
   @Prop()
   date: string
 
+  
+  @Prop()
+  reasonOfCancelation: string
+
+    
+  @Prop()
+  estimatedTime: string
+  
+
+
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

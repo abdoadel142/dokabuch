@@ -32,9 +32,9 @@ export class CartController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.User)
   @Delete('/')
-  async removeItemFromCart(@Request() req, @Body() { productId }) {
+  async removeItemFromCart(@Request() req, @Body() { id }) {
     const userId = req.user.userId;
-    const cart = await this.cartService.removeItemFromCart(userId, productId);
+    const cart = await this.cartService.removeItemFromCart(userId, id);
     if (!cart) throw new NotFoundException('Item does not exist');
     return cart;
   }

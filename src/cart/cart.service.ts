@@ -92,10 +92,10 @@ export class CartService {
     }
   }
 
-  async removeItemFromCart(userId: string, productId: string): Promise<any> {
+  async removeItemFromCart(userId: string, id: string): Promise<any> {
     const cart = await this.getCart(userId);
 
-    const itemIndex = cart.items.findIndex((item) => item.productId == productId);
+    const itemIndex = cart.items.findIndex((item) => item.id == id);
 
     if (itemIndex > -1) {
       cart.items.splice(itemIndex, 1);

@@ -20,6 +20,7 @@ export class OrderService {
   async findAll(user: User): Promise<Order[]> {
     const orders = await this.orderModel
       .find({ userId: user.userId })
+      .populate('userId')
       .populate({
         path: 'cart',
         populate: {
@@ -34,6 +35,7 @@ export class OrderService {
   async findAllOrders(): Promise<Order[]> {
     const orders = await this.orderModel
       .find()
+      .populate('userId')
       .populate({
         path: 'cart',
         populate: {
@@ -49,6 +51,7 @@ export class OrderService {
     var foundedId = new mongoose.Types.ObjectId(id);
     const order = await this.orderModel
       .findById(foundedId)
+      .populate('userId')
       .populate({
         path: 'cart',
         populate: {

@@ -21,6 +21,12 @@ export class CreateOrderDto {
     @ApiProperty()
     @IsString()
     date:string
+
+    @ApiProperty()
+    reasonOfCancelation:string
+
+    @ApiProperty()
+    estimatedTime:string
 }
 
 
