@@ -32,6 +32,11 @@ export class CartService {
     cart.totalPrice = 0;
     cart.items.forEach(async item => {
       if(item.quantity > 0){
+        // if(item.extra){
+        //   item.extra.forEach(async extra => {
+        //     cart.totalPrice += extra.extras_tile.price ;
+        //   })
+        // }
         cart.totalPrice += (item.quantity * item.price);
       }else{
         await this.removeItemFromCart(cart.userId,item.productId)

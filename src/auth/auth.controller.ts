@@ -45,4 +45,11 @@ export class AuthController {
   activate(@Body() activeDto:ActiveDto) {
     return this.authService.activate(activeDto);
   }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Post('/app/order/status')
+  activateOrder(@Body() activeDto:ActiveDto) {
+    return this.authService.activateOrders(activeDto);
+  }
 }

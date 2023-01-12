@@ -24,6 +24,14 @@ export class AuthService {
     return "successfully toggle status";
   }
 
+  async activateOrders(activeDto: ActiveDto): Promise<any> {
+    const foundActive =await this.findActive()
+    activeDto.canPlaceOrder= !foundActive.canPlaceOrder
+    const updatedAuth = await this.authModel
+    .findByIdAndUpdate(foundActive._id, activeDto, { new: false });
+    return "successfully toggle status";
+  }
+
   async create(activeDto: ActiveDto): Promise<any> {
     const found = await this.authModel.find().exec();
     if(found.length>0) return

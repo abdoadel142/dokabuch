@@ -12,8 +12,8 @@ export class Order {
   @Prop({ type: SchemaTypes.ObjectId, ref: 'Cart' })
   cart: ObjectId;
 
-  @Prop()
-  address: string; 
+  @Prop({ type: SchemaTypes.ObjectId, ref: 'Location' })
+  address: ObjectId; 
   
   
   @Prop()

@@ -15,4 +15,6 @@ export class LoginDto {
 
 export class ActiveDto {
     isActive: Boolean;
+
+    canPlaceOrder: Boolean
 }

@@ -17,10 +17,10 @@ export class LocationService {
   async updatePrimaryLocations(user:User){
     var locations = await this.findAll(user);
     locations.forEach(async location=>{
-      let updateLocationDto = new UpdateLocationDto ;
-      let loc= new locationDto
-      loc.isPrimary=false
-      updateLocationDto.location= loc
+      let updateLocationDto : UpdateLocationDto ;
+      // let loc: locationDto
+      // loc.isPrimary=false
+      updateLocationDto.location.isPrimary= false
       await this.update(location._id,updateLocationDto )
     })
     

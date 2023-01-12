@@ -21,6 +21,7 @@ export class OrderService {
     const orders = await this.orderModel
       .find({ userId: user.userId })
       .populate('userId')
+      .populate('address')
       .populate({
         path: 'cart',
         populate: {
@@ -36,6 +37,7 @@ export class OrderService {
     const orders = await this.orderModel
       .find()
       .populate('userId')
+      .populate('address')
       .populate({
         path: 'cart',
         populate: {
@@ -52,6 +54,7 @@ export class OrderService {
     const order = await this.orderModel
       .findById(foundedId)
       .populate('userId')
+      .populate('address')
       .populate({
         path: 'cart',
         populate: {

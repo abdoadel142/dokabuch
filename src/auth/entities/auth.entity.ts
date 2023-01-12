@@ -9,6 +9,9 @@ export class Auth {
   @Prop({type:Boolean,default:true})
   isActive: Boolean;
 
+  @Prop({type:Boolean,default:true})
+  canPlaceOrder: Boolean;
+
   @Prop()
   appVersion: Number;
  
