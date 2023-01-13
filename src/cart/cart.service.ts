@@ -20,6 +20,7 @@ export class CartService {
 
   async getCart(userId: string): Promise<CartDocument> {    
     const cart = await this.cartModel.findOne({ userId });
+    this.recalculateCart(cart)
     return cart;
   }
 
@@ -31,12 +32,12 @@ export class CartService {
   private recalculateCart(cart: CartDocument) {
     cart.totalPrice = 0;
     cart.items.forEach(async item => {
-      if(item.quantity > 0){
-        // if(item.extra){
-        //   item.extra.forEach(async extra => {
-        //     cart.totalPrice += extra.extras_tile.price ;
-        //   })
-        // }
+      if(item.quantity > 0){        
+        if(item['extras']){
+          item['extras'].forEach(async extra => {
+            cart.totalPrice += extra.extras_tile.price ;
+          })
+        }
         cart.totalPrice += (item.quantity * item.price);
       }else{
         await this.removeItemFromCart(cart.userId,item.productId)
