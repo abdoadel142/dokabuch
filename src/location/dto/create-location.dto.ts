@@ -9,11 +9,11 @@ import {
 export class locationDto {
   @IsNumber()
   @ApiProperty()
-  lat: number;
+  lat: Number;
 
   @IsNumber()
   @ApiProperty()
-  long: number;
+  long: Number;
 
   @IsString()
   @ApiProperty()
