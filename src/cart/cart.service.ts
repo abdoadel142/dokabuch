@@ -20,7 +20,6 @@ export class CartService {
 
   async getCart(userId: string): Promise<CartDocument> {    
     const cart = await this.cartModel.findOne({ userId });
-    this.recalculateCart(cart)
     return cart;  
   
     
@@ -70,6 +69,8 @@ export class CartService {
         this.recalculateCart(cart);
         return cart.save();
       } else {
+        console.log(cart);
+        
         cart.items.push({ ...itemDTO, subTotalPrice });
         this.recalculateCart(cart);
         return cart.save();
