@@ -45,7 +45,7 @@ export class CartService {
           })
         }
         cart.totalPrice += (item.quantity * item.price);
-      }else{
+      }else{        
         await this.removeItemFromCart(cart.userId,item.id)
       }
     })
@@ -68,9 +68,7 @@ export class CartService {
         cart.items[itemIndex] = item;
         this.recalculateCart(cart);
         return cart.save();
-      } else {
-        console.log(cart);
-        
+      } else {        
         cart.items.push({ ...itemDTO, subTotalPrice });
         this.recalculateCart(cart);
         return cart.save();
@@ -91,7 +89,7 @@ export class CartService {
 
       if (itemIndex > -1) {
         let item = cart.items[itemIndex];
-        item.quantity = Number(item.quantity) + Number(quantity);
+        item.quantity = Number(quantity);
         item.subTotalPrice = item.quantity * item.price;
 
         cart.items[itemIndex] = item;
