@@ -22,7 +22,6 @@ export class RolesGuard implements CanActivate {
     if(user.roles.includes(Role.User)){
       const activeAuth = await this.authService.findActive()
       let active=activeAuth.isActive
-      console.log(activeAuth,"ddddddd");
       
       if(!active) throw new HttpException("Restaurant not active ",HttpStatus.NOT_ACCEPTABLE)
       

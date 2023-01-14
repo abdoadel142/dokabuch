@@ -17,7 +17,6 @@ export class ProductController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
   }
 
   @Get('/')

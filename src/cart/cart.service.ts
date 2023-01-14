@@ -20,11 +20,9 @@ export class CartService {
 
   async getCart(userId: string): Promise<CartDocument> {    
     const cart = await this.cartModel.findOne({ userId });
-    if(cart){
     this.recalculateCart(cart)
     return cart;  
-  }
-  throw new HttpException("not found cart",HttpStatus.NOT_FOUND)
+  
     
   }
 
@@ -34,10 +32,11 @@ export class CartService {
   }
 
   private recalculateCart(cart: CartDocument) {
+    
     cart.totalPrice = 0;
     cart.items.forEach(async item => {
       if(item.quantity > 0){        
-        if(item['extras']){
+        if(item['extras'].length>0){   
           item['extras'].forEach(async extra => {
             cart.totalPrice += extra.extras_tile.price ;
           })

@@ -9,12 +9,10 @@ export class ActivationMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
     const activeAuth = await this.authService.findActive()
     let active=activeAuth.canPlaceOrder
-    console.log("ddddddddddd",active);
     
     if(!active){
         throw new HttpException("can not place order write now ",HttpStatus.METHOD_NOT_ALLOWED)
     }
-    console.log('Request...');
     next();
   }
 }
