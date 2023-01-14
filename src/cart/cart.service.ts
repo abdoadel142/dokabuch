@@ -38,7 +38,11 @@ export class CartService {
       if(item.quantity > 0){        
         if(item['extras'].length>0){   
           item['extras'].forEach(async extra => {
-            cart.totalPrice += extra.extras_tile.price ;
+            if(extra.extraTile.length>0){
+              extra.extraTile.forEach(tile=>{
+                cart.totalPrice += tile.price ;
+              })
+            }
           })
         }
         cart.totalPrice += (item.quantity * item.price);
