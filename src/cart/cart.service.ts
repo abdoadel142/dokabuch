@@ -46,7 +46,7 @@ export class CartService {
         }
         cart.totalPrice += (item.quantity * item.price);
       }else{
-        await this.removeItemFromCart(cart.userId,item.productId)
+        await this.removeItemFromCart(cart.userId,item.id)
       }
     })
   }
@@ -96,7 +96,9 @@ export class CartService {
 
         cart.items[itemIndex] = item;
         this.recalculateCart(cart);
-        return cart.save();
+        await cart.save();
+        return cart
+        
       } else {
         throw new HttpException("item not found",HttpStatus.NOT_FOUND)
 
