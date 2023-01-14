@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber, IsString, Max } from "class-validator";
+import { IsNumber, IsString, Max, Min } from "class-validator";
 
 export class ItemDTO {
   @IsString()
@@ -14,6 +14,7 @@ export class ItemDTO {
   name: string;
 
   @Max(6)
+  @Min(0)
   @ApiProperty()
   quantity: number;
   

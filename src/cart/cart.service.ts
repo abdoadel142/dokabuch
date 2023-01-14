@@ -33,22 +33,25 @@ export class CartService {
   private recalculateCart(cart: CartDocument) {
     
     cart.totalPrice = 0;
-    cart.items.forEach(async item => {
-      if(item.quantity > 0){        
-        if(item['extras'].length>0){   
-          item['extras'].forEach(async extra => {
-            if(extra.extraTile.length>0){
-              extra.extraTile.forEach(tile=>{
-                cart.totalPrice += tile.price ;
-              })
-            }
-          })
+    if(cart.items.length>0){
+      cart.items.forEach(async item => {
+        if(item.quantity > 0){        
+          if(item['extras'].length>0){   
+            item['extras'].forEach(async extra => {
+              if(extra.extraTile.length>0){
+                extra.extraTile.forEach(tile=>{
+                  cart.totalPrice += tile.price ;
+                })
+              }
+            })
+          }
+          cart.totalPrice += (item.quantity * item.price);
+        }else{                  
+          await this.removeItemFromCart(cart.userId,item.id)
         }
-        cart.totalPrice += (item.quantity * item.price);
-      }else{        
-        await this.removeItemFromCart(cart.userId,item.id)
-      }
-    })
+      })
+    }
+   
   }
 
   async addItemToCart(userId: string, itemDTO: ItemDTO): Promise<Cart> {
@@ -94,8 +97,8 @@ export class CartService {
 
         cart.items[itemIndex] = item;
         this.recalculateCart(cart);
-        await cart.save();
-        return cart
+        let updatedCart = await cart.save();
+        return updatedCart
         
       } else {
         throw new HttpException("item not found",HttpStatus.NOT_FOUND)
