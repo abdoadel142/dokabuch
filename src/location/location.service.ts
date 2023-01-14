@@ -16,7 +16,8 @@ export class LocationService {
 
   async updatePrimaryLocations(user:User){
     var locations = await this.findAll(user);
-    if(locations){locations.forEach(async location=>{
+    if(locations.length>0){
+      locations.forEach(async location=>{
       let updateLocationDto : UpdateLocationDto ;
       // let loc: locationDto
       // loc.isPrimary=false
