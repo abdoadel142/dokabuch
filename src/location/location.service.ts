@@ -19,7 +19,7 @@ export class LocationService {
     if(locations.length>0){
       locations.forEach(async location=>{
         location.location.isPrimary=false
-        await this.update(location._id,location ,user)
+        await this.updateLoc(location._id,location ,user)
       })
       
     }
@@ -52,7 +52,7 @@ export class LocationService {
     return location;
   }
 
-  async update(
+  async updateLoc(
     id: string,
     updateLocationDto: UpdateLocationDto,
     user:User
@@ -64,10 +64,25 @@ export class LocationService {
       updateLocationDto,
       { new: true },
     );
-    if(updatedLocation.location.isPrimary==true){
+    return updatedLocation.save();
+  }
+
+  async update(
+    id: string,
+    updateLocationDto: UpdateLocationDto,
+    user:User
+  ): Promise<Location> {
+    var foundedId = new mongoose.Types.ObjectId(id);
+    if(updateLocationDto.location.isPrimary==true){
       await this.updatePrimaryLocations(user)
     }
-    return updatedLocation;
+    const updatedLocation = await this.locationModel.findByIdAndUpdate(
+      foundedId,
+      updateLocationDto,
+      { new: true },
+    );
+
+    return updatedLocation.save();
   }
 
   async remove(id: string): Promise<Location> {    
@@ -75,3 +90,4 @@ export class LocationService {
     const deletedLocation = await this.locationModel.findByIdAndRemove(foundedId);
     return deletedLocation;  }
 }
+
