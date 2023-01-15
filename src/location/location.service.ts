@@ -19,7 +19,7 @@ export class LocationService {
     if(locations.length>0){
       locations.forEach(async location=>{
         location.location.isPrimary=false
-        await this.update(location._id,location )
+        await this.update(location._id,location ,user)
       })
       
     }
@@ -55,6 +55,7 @@ export class LocationService {
   async update(
     id: string,
     updateLocationDto: UpdateLocationDto,
+    user:User
   ): Promise<Location> {
     var foundedId = new mongoose.Types.ObjectId(id);
 
@@ -63,6 +64,9 @@ export class LocationService {
       updateLocationDto,
       { new: true },
     );
+    if(updatedLocation.location.isPrimary==true){
+      await this.updatePrimaryLocations(user)
+    }
     return updatedLocation;
   }
 

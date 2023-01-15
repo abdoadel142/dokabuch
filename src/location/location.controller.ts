@@ -35,8 +35,8 @@ export class LocationController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.User,Role.Admin)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLocationDto: UpdateLocationDto) {
-    return this.locationService.update(id, updateLocationDto);
+  update(@Param('id') id: string, @Body() updateLocationDto: UpdateLocationDto,@Request() req) {
+    return this.locationService.update(id, updateLocationDto,req.user);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
