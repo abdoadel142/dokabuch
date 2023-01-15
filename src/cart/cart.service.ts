@@ -30,7 +30,7 @@ export class CartService {
     return deletedCart;
   }
 
-  private recalculateCart(cart: CartDocument) {
+  private recalculateCart(cart: Cart) {
     
     cart.totalPrice = 0;
     if(cart.items.length>0){
@@ -38,6 +38,7 @@ export class CartService {
         if(item.quantity > 0){        
           if(item['extras'].length>0){   
             item['extras'].forEach(async extra => {
+              cart.totalPrice += (extra.price * item.quantity) ;
               if(extra.extraTile.length>0){
                 extra.extraTile.forEach(tile=>{
                   cart.totalPrice += (tile.price * item.quantity) ;
@@ -78,6 +79,8 @@ export class CartService {
       }
     } else {
       const newCart = await this.createCart(userId, itemDTO, subTotalPrice, price);
+      this.recalculateCart(newCart);
+
       return newCart;
     }
   }
