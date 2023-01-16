@@ -19,7 +19,21 @@ export class CartService {
   }
 
   async getCart(userId: string): Promise<CartDocument> {    
-    const cart = await this.cartModel.findOne({ userId });
+    const cart = await this.cartModel.findOne({ userId }).populate({
+      path: 'items',
+      populate: {
+        path: 'productId',
+        model: 'Product',
+        populate: [{
+          path: 'category',
+          model: 'Category',
+        },
+        {
+          path: 'extra',
+          model: 'Extra',
+        }],
+      },
+    });
     return cart;  
   
     
