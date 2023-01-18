@@ -50,8 +50,8 @@ export class CartService {
     if(cart.items.length>0){
       cart.items.forEach(async item => {
         if(item.quantity > 0){        
-          if(item['extras'].length>0){   
-            item['extras'].forEach(async extra => {
+          if(item.productId['extra'].length>0){   
+            item.productId['extra'].forEach(async extra => {
               cart.totalPrice += (extra.price * item.quantity) ;
               if(extra.extraTile.length>0){
                 extra.extraTile.forEach(tile=>{
@@ -60,7 +60,7 @@ export class CartService {
               }
             })
           }
-          cart.totalPrice += (item.quantity * item.price);
+          cart.totalPrice += (item.quantity * item.productId['price']);
         }else{                  
           await this.removeItemFromCart(cart.userId,item.id)
         }
@@ -71,9 +71,9 @@ export class CartService {
 
   async addItemToCart(userId: string, itemDTO: ItemDTO): Promise<Cart> {
     const { productId, quantity, price,id = uuidv4() } = itemDTO;
-    const subTotalPrice = quantity * price;
 
     const cart = await this.getCart(userId);
+    const subTotalPrice = quantity * price;
 
     if (cart) {
       const itemIndex = cart.items.findIndex((item) => item.id == id);
@@ -81,7 +81,7 @@ export class CartService {
       if (itemIndex > -1) {
         let item = cart.items[itemIndex];
         item.quantity = Number(item.quantity) + Number(quantity);
-        item.subTotalPrice = item.quantity * item.price;
+        item.subTotalPrice = item.quantity * item.productId['price'];
 
         cart.items[itemIndex] = item;
         this.recalculateCart(cart);
@@ -93,9 +93,11 @@ export class CartService {
       }
     } else {
       const newCart = await this.createCart(userId, itemDTO, subTotalPrice, price);
-      this.recalculateCart(newCart);
+      const myCart = await this.getCart(newCart.userId);
 
-      return newCart;
+      this.recalculateCart(myCart);
+
+      return myCart;
     }
   }
   
