@@ -40,6 +40,14 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Cashier)
+  @Get('/cashier')
+  getCashier(@Request() req) {
+    return req.user;
+  }
+
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Post('/app/status')
   activate(@Body() activeDto:ActiveDto) {

@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, SchemaTypes } from 'mongoose';
+import { Document, ObjectId, SchemaTypes } from 'mongoose';
+import { Extra } from 'src/extras/entities/extra.entity';
 
 export type ItemDocument = Item & Document;
 
@@ -10,22 +11,14 @@ export class Item {
   id: string;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'Product' })
-  productId: string;
-
-  @Prop()
-  name: string;
+  product: string;
 
   @Prop()
   quantity: number;
 
-  @Prop()
-  price: number;
 
-  @Prop()
-  subTotalPrice: number; 
-
-  @Prop({ type: [SchemaTypes.ObjectId], ref: 'Extra' })
-  extra: [];
+  @Prop({type:[{ type: SchemaTypes.ObjectId, ref: Extra.name }]})
+  extra: ObjectId[];
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);

@@ -26,7 +26,7 @@ export class OrderController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.Cashier,Role.Admin)
   @Get('cashier')
   findAllOrders() {
     return this.orderService.findAllOrders();
@@ -40,14 +40,14 @@ export class OrderController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User,Role.Admin)
+  @Roles(Role.User,Role.Admin,Role.Cashier)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.orderService.update(id, updateOrderDto);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User,Role.Admin)
+  @Roles(Role.User,Role.Admin,Role.Cashier)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.orderService.remove(id);
